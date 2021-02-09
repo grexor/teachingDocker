@@ -1,12 +1,12 @@
 # teachingDocker
 
-To avoid large file transfers and other Docker issues in the future, we established a Docker teaching repository on GitHub:
+To avoid large file transfers and other Docker issues in the future, we established this GitHub repository:
 
 https://github.com/grexor/teachingDocker
 
 I would kindly ask you to check the Dockerfile in this repository (https://github.com/grexor/teachingDocker/blob/main/Dockerfile).
 
-I edited the file to add the user “student”, install R, some R libraries, salmon etc. However we would need to edit this further to install all bio609/bio610/bio634 required software.
+I edited the file to add the user “student”, install R, some R libraries, salmon etc. However we would need to edit this further to install all BIO 609/610/634 required software.
 
 Using this Docker image is now super easy.
 
