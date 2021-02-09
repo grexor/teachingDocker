@@ -4,9 +4,11 @@ To avoid large file transfers and other Docker issues in the future, we establis
 
 https://github.com/grexor/teachingDocker
 
-I would kindly ask you to check the Dockerfile in this repository (https://github.com/grexor/teachingDocker/blob/main/Dockerfile).
+Would kindly ask you to check the Dockerfile in this repository (https://github.com/grexor/teachingDocker/blob/main/Dockerfile).
 
-I edited the file to add the user “student”, install R, some R libraries, salmon etc. However we would need to edit this further to install all BIO 609/610/634 required software.
+The current version adds the user “student”, installs R, some R libraries, salmon etc.
+
+***Now we would need to edit the Dockerfile further to install all BIO 609/610/634 required software.***
 
 Using this Docker image is now super easy.
 
