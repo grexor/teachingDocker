@@ -20,7 +20,7 @@ and then build (only first time, or when Dockerfile changes):
 build.sh
 ```
 
-To run the container (login with username `student`) simple execute:
+To run the container (login with username `student`) execute:
 
 ```
 run.sh
