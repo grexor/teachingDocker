@@ -14,10 +14,15 @@ You clone the repository:
 
 `git clone https://github.com/grexor/teachingDocker.git`
 
-and then run:
+and then build (only first time, or when Dockerfile changes):
 
 ```
 build.sh
+```
+
+To run the container (login with username `student`) simple execute:
+
+```
 run.sh
 ```
 
