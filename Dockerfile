@@ -83,9 +83,23 @@ RUN ./R -e 'BiocManager::install("edgeR")'
 # paths
 RUN echo "export PATH=$PATH:~/software/salmon/bin" >> ~/.bashrc
 RUN echo "export PATH=$PATH:~/software/R/bin" >> ~/.bashrc
-RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
+RUN echo "export PATH=$PATH:~/software/miniconda/bin" >> ~/.bashrc
+#RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
 
 WORKDIR /home/student
 
 # Bio610 data
 RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/software/miniconda
+RUN rm Miniconda3-latest-Linux-x86_64.sh
+RUN /home/student/software/miniconda/bin/conda init
+RUN . "/home/student/software/miniconda/etc/profile.d/conda.sh"
+RUN /home/student/software/miniconda/bin/conda install -c bioconda fastqc -y       # v0.11.9
+RUN /home/student/software/miniconda/bin/conda install -c bioconda trimmomatic -y  # v0.39
+RUN /home/student/software/miniconda/bin/conda install -c bioconda bowtie2 -y      # v2.4.1
+RUN ln -s /home/student/software/miniconda/lib/libcrypto.so.1.1 /home/student/software/miniconda/lib/libcrypto.so.1.0.0
+RUN /home/student/software/miniconda/bin/conda install -c bioconda soapdenovo2 -y  # v2.40, samtools v1.19
+RUN /home/student/software/miniconda/bin/conda install -c bioconda bcftools -y     # v1.9
+RUN /home/student/software/miniconda/bin/conda install -c bioconda bedtools -y     # v2.30
+
