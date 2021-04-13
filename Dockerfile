@@ -6,7 +6,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Europe/Zurich
 
 USER root
+RUN yes | unminimize
 RUN apt update
+RUN apt-get install -y man
 RUN apt-get install -y libbz2-dev
 RUN apt-get install -y liblzma-dev
 RUN apt-get install -y vim
