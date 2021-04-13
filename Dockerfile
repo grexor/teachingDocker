@@ -82,16 +82,10 @@ WORKDIR /home/student/software/R/bin
 RUN ./R -e 'install.packages("BiocManager", repos = "http://cran.us.r-project.org")'
 RUN ./R -e 'BiocManager::install("edgeR")'
 
-# paths
-RUN echo "export PATH=$PATH:~/software/salmon/bin" >> ~/.bashrc
-RUN echo "export PATH=$PATH:~/software/R/bin" >> ~/.bashrc
-RUN echo "export PATH=$PATH:~/software/miniconda/bin" >> ~/.bashrc
-#RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
-
 WORKDIR /home/student
 
 # Bio610 data
-RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
+#RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/software/miniconda
 RUN rm Miniconda3-latest-Linux-x86_64.sh
@@ -105,3 +99,8 @@ RUN /home/student/software/miniconda/bin/conda install -c bioconda soapdenovo2 -
 RUN /home/student/software/miniconda/bin/conda install -c bioconda bcftools -y     # v1.9
 RUN /home/student/software/miniconda/bin/conda install -c bioconda bedtools -y     # v2.30
 
+# paths
+RUN echo 'export PATH=$PATH:~/software/salmon/bin' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:~/software/R/bin' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:~/software/miniconda/bin' >> ~/.bashrc
+#RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
