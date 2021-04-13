@@ -86,3 +86,6 @@ RUN echo "export PATH=$PATH:~/software/R/bin" >> ~/.bashrc
 RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
 
 WORKDIR /home/student
+
+# Bio610 data
+RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
