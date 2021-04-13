@@ -17,6 +17,7 @@ RUN apt-get install -y git
 RUN apt-get install -y python3-pip
 RUN apt-get install -y rna-star
 RUN apt-get install -y samtools
+RUN apt-get install -y nano
 
 # matplotlib
 RUN apt-get install -y libfreetype6-dev
