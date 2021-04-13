@@ -85,7 +85,7 @@ RUN ./R -e 'BiocManager::install("edgeR")'
 WORKDIR /home/student
 
 # Bio610 data
-#RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
+RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/software/miniconda
 RUN rm Miniconda3-latest-Linux-x86_64.sh
