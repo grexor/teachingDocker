@@ -30,6 +30,7 @@ RUN pip3 install numpy
 RUN pip3 install matplotlib==3.2
 RUN pip3 install regex
 RUN pip3 install pandas
+RUN pip3 install HTSeq
 
 # R (from rep)
 #RUN apt-get install -y software-properties-common
