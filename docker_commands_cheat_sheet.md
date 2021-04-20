@@ -6,7 +6,7 @@ You can refer to
 
 ![docker_image](https://miro.medium.com/max/2520/1*p8k1b2DZTQEW_yf0hYniXw.png)
 
-# 1. Important commands
+# 1. Important commands
 
 Check docker image list
 ```
@@ -57,7 +57,7 @@ Login a container
 $ docker exec -it <container_ID>|<container_name> bash
 ```
 
-# 3. Docker image operation
+# 3. Docker image operation
 
 Save an image to file 
 ```
