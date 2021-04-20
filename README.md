@@ -1,33 +1,50 @@
 # teachingDocker
 
-To avoid large file transfers and other Docker issues in the future, we established this GitHub repository:
+BIO 609 / 610 / 634 teaching Docker
 
-https://github.com/grexor/teachingDocker
+# Installation
 
-Would kindly ask you to check the Dockerfile in this repository (https://github.com/grexor/teachingDocker/blob/main/Dockerfile).
-
-The current version adds the user “student”, installs R, some R libraries, salmon etc.
-
-***Now we would need to edit the Dockerfile further to install all BIO 609/610/634 required software.***
-
-Using this Docker image is now super easy.
-
-You clone the repository:
+Clone the repository:
 
 `git clone https://github.com/grexor/teachingDocker.git`
 
-and then build (only first time, or when Dockerfile changes):
+or download (Download ZIP on the right) and extract to a local folder on your computer.
+
+You need to have Docker installed (https://www.docker.com/products/docker-desktop).
+
+Then build the container:
 
 ```
-build.sh
+docker build . --tag biodocker
 ```
+
+# Running [Mac, Linux]
 
 To run the container (login with username `student`) execute:
 
 ```
-run.sh
+mkdir data; chmod 777 data;
+docker run -v `pwd`/data:/home/student/data --user student --hostname biodocker -ti biodocker bash --login
 ```
 
-With executing `run.sh`, you are logged into the Docker container with username `student`. At the same time, a folder called `data` is created on your local drive, which is mapped to `/home/student/data` on the local container.
+# Running [Windows]
 
-This setup should avoid us any major trouble in future classes (let’s hope).
+To run the container (login with username `student`) execute:
+
+```
+docker run -v "C:/Users/username/Desktop/teachingDocker/data":/home/student/data --hostname biodocker --user student -ti biodocker bash --login
+```
+
+The *username* should change depending on your environment. This also assumes you downloaded this repository to `Desktop/teachingDocker`.
+
+# Testing installation
+
+If you are logged into the Docker container with username `student` you should see this:
+
+`(base) student@biodocker:~$`
+
+To test if you `data` folder is writable, please execute:
+
+`touch data/test`
+
+If there is no error, everything works.
