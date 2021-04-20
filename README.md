@@ -8,7 +8,7 @@ Clone the repository:
 
 `git clone https://github.com/grexor/teachingDocker.git`
 
-or download (Download ZIP on the right) and extract to a local folder on your computer.
+or download (Code / Download ZIP on the right) and extract to a local folder (Desktop?) on your computer.
 
 You need to have Docker installed (https://www.docker.com/products/docker-desktop).
 
