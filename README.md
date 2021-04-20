@@ -20,7 +20,7 @@ docker build . --tag biodocker
 
 # Running [Mac, Linux]
 
-To run the container (login with username `student`) execute:
+To run the container (login with username `student`) execute these commands in the terminal (console):
 
 ```
 mkdir data; chmod 777 data;
@@ -29,7 +29,7 @@ docker run -v `pwd`/data:/home/student/data --user student --hostname biodocker 
 
 # Running [Windows]
 
-To run the container (login with username `student`) execute:
+To run the container (login with username `student`) execute this commands in the Windows Prompt (cmd) terminal:
 
 ```
 docker run -v "C:/Users/username/Desktop/teachingDocker/data":/home/student/data --hostname biodocker --user student -ti biodocker bash --login
