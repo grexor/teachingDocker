@@ -43,7 +43,7 @@ If you are logged into the Docker container with username `student` you should s
 
 `(base) student@biodocker:~$`
 
-To test if you `data` folder is writable, please execute:
+To make sure your `data` folder is writable, run this in the container:
 
 `touch data/test`
 
