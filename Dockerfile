@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 groovy
+FROM groovy
 
 MAINTAINER Gregor Rot <gregor.rot@gmail.com>
 
