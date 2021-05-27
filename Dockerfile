@@ -71,6 +71,12 @@ RUN tar xfz salmon.tgz
 RUN rm salmon.tgz
 RUN mv salmon-latest_linux_x86_64/ salmon
 
+# SOAPec, picard
+WORKDIR /home/student/software
+RUN wget http://sourceforge.net/projects/soapdenovo2/files/ErrorCorrection/SOAPec_v2.01.tar.gz
+RUN tar xfz SOAPec_v2.01.tar.gz
+RUN wget https://github.com/broadinstitute/picard/releases/download/2.23.8/picard.jar
+
 # R (compile)
 WORKDIR /home/student/software
 RUN wget https://cran.r-project.org/src/base/R-4/R-4.0.5.tar.gz
@@ -116,11 +122,27 @@ RUN wget https://github.com/freebayes/freebayes/releases/download/v1.3.4/freebay
 RUN gunzip freebayes.gz
 RUN chmod +x freebayes
 
+# trimgalore
+WORKDIR /home/student/software
+RUN wget https://github.com/FelixKrueger/TrimGalore/archive/refs/tags/0.6.6.zip -O trim.zip
+RUN unzip trim.zip
+RUN rm trim.zip
+
+# bwa
+USER root
+RUN apt-get install -y bwa
+
+# cutadapt
+RUN python3 -m pip install --upgrade cutadapt
+
+USER student
+
 # paths
 RUN echo 'export PATH=$PATH:~/software/salmon/bin' >> ~/.bashrc
 RUN echo 'export PATH=$PATH:~/software/R/bin' >> ~/.bashrc
 RUN echo 'export PATH=$PATH:~/software/miniconda/bin' >> ~/.bashrc
 RUN echo 'export PATH=$PATH:~/software/freebayes' >> ~/.bashrc
-#RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
+RUN echo 'export PATH=$PATH:~/software/SOAPec_v2.01/bin' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:~/software/TrimGalore-0.6.6' >> ~/.bashrc
 
 WORKDIR /home/student
