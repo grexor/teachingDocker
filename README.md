@@ -23,7 +23,8 @@ docker build . --tag biodocker
 To run the container (login with username `student`) execute these commands in the terminal (console):
 
 ```
-mkdir data; chmod 777 data;
+mkdir data
+chmod 777 data
 docker run -v `pwd`/data:/home/student/data --user student --hostname biodocker -ti biodocker bash --login
 ```
 
