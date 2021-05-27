@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 groovy
+FROM groovy
 
 MAINTAINER Gregor Rot <gregor.rot@gmail.com>
 
@@ -87,7 +87,8 @@ RUN ./R -e 'BiocManager::install("edgeR")'
 WORKDIR /home/student
 
 # Bio610 data
-RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/ngslec.tgz
+RUN mkdir materials
+RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/materials/ngslec.tgz
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/software/miniconda
 RUN rm Miniconda3-latest-Linux-x86_64.sh
@@ -101,8 +102,25 @@ RUN /home/student/software/miniconda/bin/conda install -c bioconda soapdenovo2 -
 RUN /home/student/software/miniconda/bin/conda install -c bioconda bcftools -y     # v1.9
 RUN /home/student/software/miniconda/bin/conda install -c bioconda bedtools -y     # v2.30
 
+# Bio634 data
+RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/DATA_NGS2_SNP.zip -O ~/materials/DATA_NGS2_SNP.zip
+RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/EcoliDH10B.fa -O ~/materials/EcoliDH10B.fa
+RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/EcoliDH10B.gff -O ~/materials/EcoliDH10B.gff
+RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/MiSeq_Ecoli_DH10B_110721_PF_subsample.bam -O ~/materials/MiSeq_Ecoli_DH10B_110721_PF_subsample.bam
+
+# freebayes
+WORKDIR /home/student/software
+RUN mkdir freebayes
+WORKDIR /home/student/software/freebayes
+RUN wget https://github.com/freebayes/freebayes/releases/download/v1.3.4/freebayes-1.3.4-linux-static-AMD64.gz -O freebayes.gz
+RUN gunzip freebayes.gz
+RUN chmod +x freebayes
+
 # paths
 RUN echo 'export PATH=$PATH:~/software/salmon/bin' >> ~/.bashrc
 RUN echo 'export PATH=$PATH:~/software/R/bin' >> ~/.bashrc
 RUN echo 'export PATH=$PATH:~/software/miniconda/bin' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:~/software/freebayes' >> ~/.bashrc
 #RUN echo "export PYTHONPATH=$PYTHONPATH:/home/student" >> ~/.bashrc
+
+WORKDIR /home/student
