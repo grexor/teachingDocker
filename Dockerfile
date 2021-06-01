@@ -8,43 +8,8 @@ ENV TZ=Europe/Zurich
 USER root
 RUN yes | unminimize
 RUN apt update
-RUN apt-get install -y man
-RUN apt-get install -y libbz2-dev
-RUN apt-get install -y liblzma-dev
-RUN apt-get install -y vim
-RUN apt-get install -y python3
-RUN apt-get install -y git
-RUN apt-get install -y python3-pip
-RUN apt-get install -y rna-star
-RUN apt-get install -y samtools
-RUN apt-get install -y nano
-RUN apt-get install -y libxml2-dev
-
-# matplotlib
-RUN apt-get install -y libfreetype6-dev
-RUN apt-get install -y pkg-config
-RUN apt-get install -y libpng-dev
-RUN apt-get install -y pkg-config
-
-RUN pip3 install pysam
-RUN pip3 install numpy
-RUN pip3 install matplotlib==3.2
-RUN pip3 install regex
-RUN pip3 install pandas
-RUN pip3 install HTSeq
-
-# R (compile dep)
-RUN apt-get install -y build-essential
-RUN apt-get install -y fort77
-RUN apt-get install -y liblzma-dev libblas-dev gfortran
-RUN apt-get install -y gobjc++
-RUN apt-get install -y libpcre2-dev
-RUN apt-get install -y aptitude
-RUN aptitude install -y libreadline-dev
-RUN apt-get install -y default-jre
-RUN apt-get install -y default-jdk
-RUN apt-get install -y openjdk-8-jdk openjdk-8-jre
-RUN apt-get install -y libcurl4-openssl-dev
+RUN apt-get install -y man libbz2-dev liblzma-dev vim python3 git python3-pip rna-star samtools nano libxml2-dev libfreetype6-dev pkg-config libpng-dev pkg-config build-essential fort77 liblzma-dev libblas-dev gfortran gobjc++ libpcre2-dev aptitude libreadline-dev default-jre default-jdk openjdk-8-jdk openjdk-8-jre libcurl4-openssl-dev
+RUN pip3 install pysam numpy matplotlib==3.2 regex pandas HTSeq
 
 # student user
 RUN useradd -m -d /home/student student
@@ -109,9 +74,7 @@ RUN rm trim.zip
 
 # some additional software
 USER root
-RUN apt-get install -y bwa
-RUN apt-get install -y tabix
-RUN apt-get install libssl-dev
+RUN apt-get install -y bwa tabix libssl-dev
 RUN python3 -m pip install --upgrade cutadapt
 
 USER student
@@ -132,33 +95,12 @@ RUN mv storage/* .
 RUN rm -r storage
 
 # paths
-RUN echo 'export PATH=$PATH:~/software/salmon/bin' >> ~/.bashrc
-RUN echo 'export PATH=$PATH:~/software/R/bin' >> ~/.bashrc
-RUN echo 'export PATH=$PATH:~/software/miniconda/bin' >> ~/.bashrc
-RUN echo 'export PATH=$PATH:~/software/freebayes' >> ~/.bashrc
-RUN echo 'export PATH=$PATH:~/software/SOAPec_v2.01/bin' >> ~/.bashrc
-RUN echo 'export PATH=$PATH:~/software/TrimGalore-0.6.6' >> ~/.bashrc
-RUN echo 'export PATH=$PATH:~/software/vt' >> ~/.bashrc
+RUN echo 'export PATH=$PATH:~/software/salmon/bin:~/software/R/bin:~/software/miniconda/bin:~/software/freebayes:~/software/SOAPec_v2.01/bin:~/software/TrimGalore-0.6.6:~/software/vt' >> ~/.bashrc
 
 # some more R packages
 WORKDIR /home/student/software/R/bin
 RUN ./R -e 'install.packages("BiocManager", repos = "http://cran.us.r-project.org")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "edgeR")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "csaw")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "tximport")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "tximportData")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "rhdf5")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "VennDiagram")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "Matrix")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "airway")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "Rsamtools")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "pasilla")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "GenomicFeatures")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "GenomicAlignments")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "BiocParallel")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "BiocParallel")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "Rsubread")'
-RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, "DESeq2")'
+RUN ./R -e 'BiocManager::install(update=TRUE, ask=FALSE, c("edgeR", "csaw", "tximport", "tximportData", "rhdf5", "VennDiagram", "Matrix", "airway", "Rsamtools", "pasilla", "GenomicFeatures", "GenomicAlignments", "BiocParallel", "Rsubread", "DESeq2"))'
 
 # conda
 RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -166,12 +108,8 @@ RUN bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/software/miniconda
 RUN rm Miniconda3-latest-Linux-x86_64.sh
 RUN /home/student/software/miniconda/bin/conda init
 RUN . "/home/student/software/miniconda/etc/profile.d/conda.sh"
-RUN /home/student/software/miniconda/bin/conda install -c bioconda fastqc -y       # v0.11.9
-RUN /home/student/software/miniconda/bin/conda install -c bioconda trimmomatic -y  # v0.39
-RUN /home/student/software/miniconda/bin/conda install -c bioconda bowtie2 -y      # v2.4.1
+RUN /home/student/software/miniconda/bin/conda install -c bioconda fastqc trimmomatic bowtie2 -y
 RUN ln -s /home/student/software/miniconda/lib/libcrypto.so.1.1 /home/student/software/miniconda/lib/libcrypto.so.1.0.0
-RUN /home/student/software/miniconda/bin/conda install -c bioconda soapdenovo2 -y  # v2.40, samtools v1.19
-RUN /home/student/software/miniconda/bin/conda install -c bioconda bcftools -y     # v1.9
-RUN /home/student/software/miniconda/bin/conda install -c bioconda bedtools -y     # v2.30
+RUN /home/student/software/miniconda/bin/conda install -c bioconda soapdenovo2 bcftools bedtools -y
 
 WORKDIR /home/student
