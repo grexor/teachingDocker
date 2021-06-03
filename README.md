@@ -18,6 +18,8 @@ Then build the container:
 docker build . --tag biodocker
 ```
 
+Make sure the build is successful (there is no error).
+
 # Running [Mac, Linux]
 
 To run the container (login with username `student`) execute these commands in the terminal (console):
