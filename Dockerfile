@@ -53,10 +53,10 @@ RUN mkdir materials
 RUN wget https://drive.switch.ch/index.php/s/T0aepfrKjOBuk9P/download -O ~/materials/ngslec.tgz
 
 # Bio634 data
-RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/DATA_NGS2_SNP.zip -O ~/materials/DATA_NGS2_SNP.zip
-RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/EcoliDH10B.fa -O ~/materials/EcoliDH10B.fa
-RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/EcoliDH10B.gff -O ~/materials/EcoliDH10B.gff
-RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/MiSeq_Ecoli_DH10B_110721_PF_subsample.bam -O ~/materials/MiSeq_Ecoli_DH10B_110721_PF_subsample.bam
+RUN wget https://bioinfo.evolution.uzh.ch/share/bio634/DATA_NGS2_SNP.zip -O ~/materials/DATA_NGS2_SNP.zip
+RUN wget https://bioinfo.evolution.uzh.ch/share/bio634/EcoliDH10B.fa -O ~/materials/EcoliDH10B.fa
+RUN wget https://bioinfo.evolution.uzh.ch/share/bio634/EcoliDH10B.gff -O ~/materials/EcoliDH10B.gff
+RUN wget https://bioinfo.evolution.uzh.ch/share/bio634/MiSeq_Ecoli_DH10B_110721_PF_subsample.bam -O ~/materials/MiSeq_Ecoli_DH10B_110721_PF_subsample.bam
 
 # freebayes
 WORKDIR /home/student/software
@@ -88,7 +88,7 @@ RUN make
 
 # bio634 specific software
 WORKDIR /home/student/software
-RUN wget https://bioinfo.evolution.uzh.ch/share/data/bio634/bio634_software_specific.tgz
+RUN wget https://bioinfo.evolution.uzh.ch/share/bio634/bio634_software_specific.tgz
 RUN tar xfz bio634_software_specific.tgz
 RUN rm bio634_software_specific.tgz
 RUN mv storage/* .
